@@ -1,37 +1,42 @@
 import React, {useEffect, useState} from 'react'
 
 const App1 = () => {
-
-    const valueInitial = [
+  
+  const datosPersona = {
+    nombre: 'Romel',
+    apellidos: 'Zela'
+  }
+    const valueInitial =
         {
-            fecha: new Date(),
-            edad: 0,
-            nombre: 'Martín',
-            apellidos: 'San José'
-        }
-    ]
+          fecha: new Date(),
+          edad: 0
+          };
 
     const [value, setValue] = useState(valueInitial);
-
+    
     useEffect(() => {
-      
-        const timerID = setInterval(() => {
-            setValue(value.edad +1)
-            setValue(value.fecha = new Date())
-        },1000)
-        
-      return () => {
-        clearInterval(timerID);
-      }
+        const timerID = setInterval(
+          () => { tick();
+          }, 1000);
+      return () => clearInterval(timerID);      
     });
+
+    
+    
+    const tick = () => {
+      return setValue({
+        fecha: new Date(),
+        edad: value.edad + 1
+      });
+    };
 
   return (
     <div>
          <h2>
          Hora Actual:
-         {value.fecha}
+         {value.fecha.toLocaleTimeString()}
          </h2>
-         <h3>{value.nombre} {value.apellidos}</h3>
+         <h3>{datosPersona.nombre} {datosPersona.apellidos}</h3>
          <h1>Edad: {value.edad}</h1>
          </div>
   )
